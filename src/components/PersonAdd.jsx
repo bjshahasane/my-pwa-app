@@ -50,7 +50,7 @@ const PersonAdd = () => {
             setShowAlert(true);
             return;
         } else {
-            // Clear errors and proceed with adding the person
+           
             setErrors({});
             setPeople([...people, person]);
             setPerson(initialForm);
@@ -61,28 +61,19 @@ const PersonAdd = () => {
     };
 
     const handleEditPerson = (index) => {
-        // Set the person data for editing
         setPerson(people[index]);
-
-        // Set the index for editing mode
         setEditingIndex(index);
     };
 
     const handleUpdatePerson = () => {
-        // Validation can be added here
-
-        // Update the person in the list
         const updatedPeople = [...people];
         updatedPeople[editingIndex] = person;
         setPeople(updatedPeople);
-
-        // Clear the form fields and exit editing mode
         setPerson(initialForm);
         setEditingIndex(-1);
     };
 
     const handleDeletePerson = (index) => {
-        // Remove the person from the list
         const updatedPeople = people.filter((_, i) => i !== index);
         setPeople(updatedPeople);
     };
@@ -91,7 +82,6 @@ const PersonAdd = () => {
         const temp = { ...person };
         temp[name] = value;
         if (name === 'FirstName' || name === 'LastName') {
-            // Validate first name and last name for special characters
             if (!/^[a-zA-Z]+$/.test(value)) {
                 setErrors({
                     ...errors,
@@ -104,7 +94,6 @@ const PersonAdd = () => {
                 });
             }
         } else if (name === 'Email') {
-            // Validate email
             if (!validateEmail(value)) {
                 setErrors({
                     ...errors,
@@ -117,7 +106,6 @@ const PersonAdd = () => {
                 });
             }
         } else if (name === 'Phone') {
-            // Validate phone
             if (!validatePhone(value)) {
                 setErrors({
                     ...errors,
@@ -131,7 +119,6 @@ const PersonAdd = () => {
             }
         }
         if (name === 'State') {
-            // Validate phone
             if (value === "Maharashtra") {
                 temp.City = "Mumbai";
             } else if (value === "Gujrat") {
