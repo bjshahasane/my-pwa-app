@@ -33,24 +33,28 @@ const PersonAdd = () => {
     };
 
     const handleAddPerson = () => {
-        let errors = {};
+
+        if (!person.FirstName || !person.LastName || !person.Email || !person.Phone) {
+            return;
+        }
+
+        let errorsObj = {};
 
         if (!validateEmail(person.Email)) {
-            errors = { ...errors, email: true };
+            errorsObj = { ...errorsObj, Email: true };
 
         }
 
         if (!validatePhone(person.Phone)) {
-            errors = { ...errors, phone: true };
+            errorsObj = { ...errorsObj, Phone: true };
 
         }
+    
 
-        if (Object.keys(errors).length > 0) {
-            setErrors(errors);
+        if (Object.keys(errorsObj).length > 0) {
             setShowAlert(true);
             return;
         } else {
-           
             setErrors({});
             setPeople([...people, person]);
             setPerson(initialForm);
@@ -128,12 +132,12 @@ const PersonAdd = () => {
         setPerson(temp)
 
     }
-
+    console.log("this is error", errors);
     return (
         <div>
             {
                 showwAlert && (
-                    <Alert variant="filled" onClose={() => {setShowAlert(false)}} severity="error">
+                    <Alert variant="filled" onClose={() => { setShowAlert(false) }} severity="error">
                         Please resolve the errors
                     </Alert>
                 )
